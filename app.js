@@ -86,10 +86,13 @@ const findCard = () =>{ //funcion de encontrar carta
     turnCount += 1;
     turns.innerHTML = turnCount;
 
+
     if(arrImage[0].children[1].src === arrImage[1].children[1].src){
 
           acertcount += 1;
           acert.innerHTML = acertcount;
+          arrImage[0].children[1].style.opacity = '.3';
+          arrImage[1].children[1].style.opacity = '.3';
           arrImage = [];
 
     }else{
