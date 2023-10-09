@@ -1,7 +1,13 @@
 const contain = document.querySelector('main');//contenedor de las cartas
+const btnReiniciar = document.getElementById('btn');
+const acert = document.getElementById('acert');
+const turns = document.getElementById('turn');
+let acertcount = 0;
+let turnCount = 0;
 const frontCArd = 'https://rickandmortyapi.com/api/character/avatar/276.jpeg';
 let arrImage = [];
-(async()=>{//traer los datos de la api
+
+const cards = async()=>{//traer los datos de la api
     try{
         const response = await fetch('https://rickandmortyapi.com/api/character');
         const data = await response.json()
@@ -12,7 +18,13 @@ let arrImage = [];
         console.log(Error)
 
     }
-})();
+}
+cards();
+
+btnReiniciar.addEventListener('click',e =>{//boton de reiniciar
+    e.preventDefault();
+    window.location.href = './index.html';
+})
 
 const saveImages = (data) =>{//funcion de guardar las imagenes en un arreglo de 16 cartas
 
@@ -68,17 +80,20 @@ const validMove = (card) => {
             findCard() 
     }
     }
-    
-   
 }
-const findCard = () =>{
+const findCard = () =>{ //funcion de encontrar carta
+
+    turnCount += 1;
+    turns.innerHTML = turnCount;
 
     if(arrImage[0].children[1].src === arrImage[1].children[1].src){
-        console.log('verdadero');
-        arrImage = [];
+
+          acertcount += 1;
+          acert.innerHTML = acertcount;
+          arrImage = [];
 
     }else{
-        console.log('falso');
+      
             setTimeout(()=>{
                  
                  arrImage[0].style.transform = 'rotateY(0deg)';
